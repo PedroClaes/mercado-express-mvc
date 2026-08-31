@@ -1,0 +1,27 @@
+============================================================
+CHECKPOINT 4 - PARTE II (MVC e Deploy)
+============================================================
+Curso: Tecnologia em Analise e Desenvolvimento de Sistemas (TDS)
+Turma: 2TDSPV
+Professor: Dr. Marcel Stefan Wagner
+
+------------------------------------------------------------
+INTEGRANTES DO GRUPO
+------------------------------------------------------------
+- Pedro Gabriel Claes       - RM 566058
+- Matheus Arazin de Oliveira - RM 556649
+- Artur Pioli Silva         - RM 565597
+- Kevin Martins Campos      - RM 563454
+
+------------------------------------------------------------
+INFORMACOES DO PROJETO (PARTE II - separado da Parte I)
+------------------------------------------------------------
+IDE utilizada: IntelliJ IDEA
+
+Link do GitHub (Parte II - Spring MVC):
+https://github.com/PedroClaes/mercado-express-mvc.git
+
+Link do Deploy (producao):
+https://mercado-express-mvc.onrender.com
+
+Sistema utilizado para o Deploy: Render (Docker)
