@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${modoEdicao} ? 'Editar produto · Mercado Express' : 'Novo produto · Mercado Express'">Produto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="brand" th:href="@{/produtos}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        Mercado<span>Express</span>
+    </a>
+    <div class="topbar-right">
+        <div class="user-chip" sec:authorize="isAuthenticated()">
+            <span>Olá, <strong sec:authentication="name">usuário</strong></span>
+        </div>
+        <form th:action="@{/logout}" method="post" class="inline-form" sec:authorize="isAuthenticated()">
+            <button type="submit" class="btn btn-ghost btn-sm">Sair</button>
+        </form>
+    </div>
+</header>
+
+<main class="container">
+    <div class="form-card">
+        <div class="page-head">
+            <div>
+                <h1 th:text="${modoEdicao} ? 'Editar produto' : 'Novo produto'">Produto</h1>
+                <p th:text="${modoEdicao} ? 'Atualize as informações abaixo' : 'Preencha as informações do produto'">...</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- th:action garante o token CSRF automatico do Spring Security -->
+            <form th:action="@{/produtos/salvar}" th:object="${produto}" method="post">
+                <!-- id oculto: se preenchido, o save vira UPDATE; se vazio, INSERT -->
+                <input type="hidden" th:field="*{id}">
+
+                <div class="field">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" th:field="*{nome}"
+                           th:classappend="${#fields.hasErrors('nome')} ? 'invalido'"
+                           placeholder="Ex.: Arroz Branco Tipo 1">
+                    <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="field">
+                        <label for="tipo">Tipo</label>
+                        <input type="text" id="tipo" th:field="*{tipo}"
+                               th:classappend="${#fields.hasErrors('tipo')} ? 'invalido'"
+                               placeholder="Ex.: Alimento">
+                        <span class="erro" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></span>
+                    </div>
+                    <div class="field">
+                        <label for="setor">Setor</label>
+                        <input type="text" id="setor" th:field="*{setor}"
+                               th:classappend="${#fields.hasErrors('setor')} ? 'invalido'"
+                               placeholder="Ex.: Mercearia">
+                        <span class="erro" th:if="${#fields.hasErrors('setor')}" th:errors="*{setor}"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field">
+                        <label for="tamanho">Tamanho</label>
+                        <input type="text" id="tamanho" th:field="*{tamanho}"
+                               th:classappend="${#fields.hasErrors('tamanho')} ? 'invalido'"
+                               placeholder="Ex.: 5kg">
+                        <span class="erro" th:if="${#fields.hasErrors('tamanho')}" th:errors="*{tamanho}"></span>
+                    </div>
+                    <div class="field">
+                        <label for="preco">Preço (R$)</label>
+                        <input type="number" step="0.01" id="preco" th:field="*{preco}"
+                               th:classappend="${#fields.hasErrors('preco')} ? 'invalido'"
+                               placeholder="Ex.: 27.90">
+                        <span class="erro" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-brand">Salvar</button>
+                    <a th:href="@{/produtos}" class="btn btn-outline">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
