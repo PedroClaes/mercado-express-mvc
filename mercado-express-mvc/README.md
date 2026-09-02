@@ -22,6 +22,8 @@ Aplicação **web** de um mercado express, com interface em **Thymeleaf**, CRUD 
 **IDE utilizada:** IntelliJ IDEA · **Turma:** 2TDSPV
 
 🔗 **Deploy público:** _https://mercado-express-mvc.onrender.com_ · **Plataforma:** Render (Docker)
+🎬 **Vídeo demonstrativo (~5 min):** _https://youtu.be/eUdyiwK0o84_
+
 
 
 ---
